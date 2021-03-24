@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <title>SNAP Tracker</title>
+
+    <script src="bootstrap/bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/bootstrap/js/bootstrap.js"></script>
+    <script src="snap.js"></script>
+
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="bootstrap/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet" />
+    <link href="bootstrap/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="bootstrap/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet" />
+    <link href="bootstrap/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet" />
+    <link href="snap.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">SNAP Track</a>
+      <a href="#">
+        <i class="material-icons" id="profile">
+          account_circle
+        </i>
+      </a>
+    </nav>
+
+    <main>
+      <div id="container1">
+        <div class="jumbotron">
+          <h1 class="display-3">Welcome back to SNAP Track!</h1>
+          <p class="lead">
+            Here at SNAP Track, we're dedicated to ensuring your SNAP benefits do as much for you as possible.
+            We hope the tools provided here will be useful to you.
+          </p>
+        </div>
+
+      </div>
+      <div id="container2">
+        <i class="material-icons">
+          receipt
+        </i>
+        <h2>Add a Receipt!</h2>
+        <form>
+          <fieldset>
+            <div class="form-group">
+              <label for="exampleInputFile">Upload a receipt here.</label>
+              <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+              <p id="fileHelp" class="lead text-muted">
+                Thank you for helping us to improve out data. By uploading your receipts, we can gather
+                more detailed data about prices for items, which in turn allow us to better help you.
+              </small>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div id="container3">
+         <i class="material-icons">
+          store
+        </i>
+        <h2>Search for a SNAP Store near you!</h2>
+        <p class="lead">
+          Unfortunately, not all stores accept SNAP. However, this map can help you find the stores that
+          do accept SNAP!
+        </p>
+        <div id="map"></div>
+
+
+           <script>
+
+         function initMap() {
+           var latitude;
+           var longitude;
+           navigator.geolocation.getCurrentPosition(
+             function(position) {
+               fetch('https://s3-us-west-2.amazonaws.com/foodstamps2/SnapStores.csv')
+                 .then(function(response) {
+                   latitude = position.coords.latitude;
+                   longitude = position.coords.longitude;
+                   var map = new google.maps.Map(document.getElementById('map'), {
+                     zoom: 15,
+                     center: {lat: latitude, lng: longitude}
+                   });
+                   console.log(response.text()
+                     .then(function(text) {
+                       const lines = text.split("\n")
+                       lines.forEach(function(element) {
+                       row = element.split(",")
+                       longitude2 = row[2]
+                       latitude2 = row[3]
+                       name = row[1]
+                       address = row[4]
+                       float_latitude = parseFloat(latitude2)
+                       float_longitude = parseFloat(longitude2)
+                       marker = new google.maps.Marker({
+                         position: {lat: float_latitude, lng: float_longitude},
+                         map: map,
+                         title: name
+                     });})
+                 })
+               )}
+             )
+           }
+         )
+       }
+       </script>
+       <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIJDsLVVBPb7a-uGbfqN3fEylgnl9KPns&callback=initMap">
+      </script>
+     </div>
+
+     <div id = "container4">
+        <i class="material-icons">
+          search
+        </i>
+        <h2>Find what you're looking for!</h2>
+        <header>
+          <div>
+            <input id="search-input" placeholder="Search for foods">
+          </div>
+          <!--<div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+            <label class="custom-control-label lead" for="customCheck1">SNAP eligible foods only?</label>
+          </div>-->
+        </header>
+          <div id="hits"></div>
+
+          <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.js"></script>
+          <script type="text/html" id="hit-template">
+
+          <div class="hit">
+          	<div class="card border-secondary mb-3" id="card" style="max-width: 20rem;">
+       	      <div class="hit-content">
+                <h2 class="hit-name">{{Name}}</h2>
+                <h4 class="hit-foodGroup">{{FoodGroup}}</h4>
+                <p class="hit-modifiers">{{Modifiers}}</p>
+              </div>
+            </div>
+          </div>
+        </script>
+        <script src="app.js?1.02"></script>
+      </div>
+    </main>
+  </body>
+</html>

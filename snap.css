@@ -1,0 +1,119 @@
+#container1 {
+  background-color: #EEEEEF;
+  padding: 10%;
+  padding-top: 5%;
+}
+
+#container2 {
+  background-color: #F7DBD7;
+  text-align: center;
+  padding: 10%;
+  padding-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+#container3 {
+  background-color: #9CC0E7;
+  padding: 10%;
+  padding-top: 5%;
+  text-align: center;
+  width: 100%;
+}
+
+#container4 {
+  background-color: #FAEACB;
+  padding: 10%;
+  padding-top: 5%;
+  text-align: center;
+  width: 100%;
+}
+
+nav, .navbar {
+  margin-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.jumbotron {
+  background-color: #EEEEEF;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+#exampleInputFile {
+  margin-left: 41%;
+  margin-bottom: 3%;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 10em;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+#profile {
+  font-size: 2em;
+}
+
+#profile:hover {
+  cursor: pointer;
+}
+
+.ais-search-box {
+  margin-left: 37%;
+}
+
+#sbx-icon-search-13 {
+  display: none;
+}
+
+#profilePage {
+  background-color: #EEEEEF;
+}
+
+.ais-hits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.ais-hits--item {
+  margin-left: 1em;
+  margin-right: 1em;
+  width: 20rem;
+}
+
+#map {
+  height: 30em;
+  width: 50em;
+
+  max-width: 90%;
+  max-height: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.custom-checkbox {
+  padding: 2em;
+}
